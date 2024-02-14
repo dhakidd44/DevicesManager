@@ -1,5 +1,5 @@
 /*
-  Nom du fichier: SensorData.java
+  Nom du fichier: Capteur.java
   Titre      : Gestion des données du capteur.
   Auteur     : Ernest Samuel Andre
   Date       : 18/01/2024

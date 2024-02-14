@@ -11,11 +11,15 @@ package com.management;
 
 import java.util.Scanner;
 
-public class Validation {
+public class Validation implements AutoCloseable {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public static String validateStringInput(String message, String regex) {
+    public Validation() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public String validateStringInput(String message, String regex) {
         String input;
         do {
             System.out.print(message);
@@ -27,7 +31,7 @@ public class Validation {
         return input;
     }
 
-    public static int validateIntegerInput(String message) {
+    public int validateIntegerInput(String message) {
         int input;
         do {
             System.out.print(message);
@@ -43,7 +47,8 @@ public class Validation {
         return input;
     }
 
-    public static void closeScanner() {
+    @Override
+    public void close() {
         scanner.close();
     }
 }
