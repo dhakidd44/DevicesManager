@@ -34,7 +34,8 @@ public class CreateDb {
                     + "Categorie VARCHAR(255),"
                     + "Location VARCHAR(255),"
                     + "Etat INT DEFAULT 1, "
-                    + "CONSTRAINT check_etat CHECK (Etat IN (0, 1)))";
+                    + "CONSTRAINT check_etat CHECK (Etat IN (0, 1)),"
+                    + "UNIQUE (ID))"; // Ajout de la contrainte unique sur la colonne ID
             statement.executeUpdate(createTableObjets);
         }
     }

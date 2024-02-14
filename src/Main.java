@@ -12,6 +12,7 @@
 
 import com.management.Traitement;
 import com.management.ObjetConnecte;
+import com.management.Simulation;
 import com.management.CreateDb;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,10 +24,13 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            // Informations de la connexion pour PostgreSQL
+            // Informations de connexion pour PostgreSQL
             String url = "jdbc:postgresql://localhost:5432/new1";
             String utilisateur = "postgres";
             String motDePasse = "admin";
+
+            // Instanciation de la classe Simulation
+            Simulation simulation = new Simulation();
 
             // Établir la connexion
             Connection connection = DriverManager.getConnection(url, utilisateur, motDePasse);
@@ -40,6 +44,31 @@ public class Main {
             createDb.createTypeActuateurTable(connection);
             createDb.createActuateursTable(connection);
             createDb.createDonneesActuateursTable(connection);
+            try {
+                // Insertion de données aléatoires dans la table Capteurs
+                simulation.insertRandomObjets(connection);
+                System.out.println("Données des objets insérées avec succès.");
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de l'insertion des données des objets : " + e.getMessage());
+            }
+
+            try {
+                // Insertion de données aléatoires dans la table Capteurs
+                simulation.insertRandomCapteurs(connection);
+                System.out.println("Données des capteurs insérées avec succès.");
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de l'insertion des données des capteurs : " + e.getMessage());
+            }
+            
+
+            try {
+                // Insertion de données aléatoires dans la table DonneesCapteurs
+                simulation.insertRandomCapteursData(connection);
+                System.out.println("Données des capteurs insérées avec succès.");
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de l'insertion des données des capteurs : " + e.getMessage());
+            }
+
 
             // Operation de traitement
             Traitement traitement = new Traitement(connection);
@@ -108,3 +137,4 @@ public class Main {
         }
     }
 }
+

@@ -21,6 +21,7 @@ import java.util.Scanner;
 
 public class Traitement {
     private static final Scanner scanner = new Scanner(System.in);
+    Validation Validation = new Validation();
 
     private Connection connection;
 
