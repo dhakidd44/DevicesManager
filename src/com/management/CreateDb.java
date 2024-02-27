@@ -35,29 +35,28 @@ public class CreateDb {
                     + "Location VARCHAR(255),"
                     + "Etat INT DEFAULT 1, "
                     + "CONSTRAINT check_etat CHECK (Etat IN (0, 1)),"
-                    + "UNIQUE (ID))"; // Ajout de la contrainte unique sur la colonne ID
+                    + "UNIQUE (ID))";
             statement.executeUpdate(createTableObjets);
         }
     }
 
-// Méthode pour créer la table "Capteurs"
-public void createCapteursTable(Connection connection) throws SQLException {
-    try (Statement statement = connection.createStatement()) {
-        String createTableCapteurs = "CREATE TABLE Capteurs ("
-                + "ID SERIAL PRIMARY KEY,"
-                + "Nom VARCHAR(255) NOT NULL,"
-                + "Modele VARCHAR(255) NOT NULL,"
-                + "Numero_serie VARCHAR(255) NOT NULL,"
-                + "Etat INT DEFAULT 1, "
-                + "Objet_ID INT,"
-                + "TypeCapteur_ID INT,"
-                + "CONSTRAINT check_etat CHECK (Etat IN (0, 1)),"
-                + "FOREIGN KEY (Objet_ID) REFERENCES Objets(ID),"
-                + "FOREIGN KEY (TypeCapteur_ID) REFERENCES TypeCapteur(ID))";
-        statement.executeUpdate(createTableCapteurs);
+    // Méthode pour créer la table "Capteurs"
+    public void createCapteursTable(Connection connection) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            String createTableCapteurs = "CREATE TABLE Capteurs ("
+                    + "ID SERIAL PRIMARY KEY,"
+                    + "Nom VARCHAR(255) NOT NULL,"
+                    + "Modele VARCHAR(255) NOT NULL,"
+                    + "Numero_serie VARCHAR(255) NOT NULL,"
+                    + "Etat INT DEFAULT 1, "
+                    + "Objet_ID INT,"
+                    + "TypeCapteur_ID INT,"
+                    + "CONSTRAINT check_etat CHECK (Etat IN (0, 1)),"
+                    + "FOREIGN KEY (Objet_ID) REFERENCES Objets(ID),"
+                    + "FOREIGN KEY (TypeCapteur_ID) REFERENCES TypeCapteur(ID))";
+            statement.executeUpdate(createTableCapteurs);
+        }
     }
-}
-
 
     // Méthode pour créer la table "TypeCapteur"
     public void createTypeCapteursTable(Connection connection) throws SQLException {

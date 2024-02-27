@@ -14,11 +14,14 @@ import com.management.Traitement;
 import com.management.ObjetConnecte;
 import com.management.Simulation;
 import com.management.CreateDb;
+import com.management.FromGenerateur;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
 
@@ -32,8 +35,12 @@ public class Main {
             // Instanciation de la classe Simulation
             Simulation simulation = new Simulation();
 
+            
             // Établir la connexion
             Connection connection = DriverManager.getConnection(url, utilisateur, motDePasse);
+            
+            // Instanciation de la classe pour generer des donnees dans la pile
+            FromGenerateur fromGenerateur = new FromGenerateur(connection);
 
             // Créer les tables en utilisant la classe CreateDb
             CreateDb createDb = new CreateDb();
@@ -67,8 +74,19 @@ public class Main {
                 System.out.println("Données des capteurs insérées avec succès.");
             } catch (SQLException e) {
                 System.err.println("Erreur lors de l'insertion des données des capteurs : " + e.getMessage());
-            }
-
+            } 
+                // Création d'une pile pour stocker les données
+                Stack<FromGenerateur.Data> dataStack = new Stack<>();
+            
+                // Ajout de données aléatoires à la pile
+                fromGenerateur.addRandomDataToStack(dataStack, 10);
+            
+                // Affichage des informations stockées dans la pile
+                System.out.println("Informations stockées dans la pile :");
+                while (!dataStack.isEmpty()) {
+                    FromGenerateur.Data data = dataStack.pop();
+                    System.out.println("Valeur : " + data.getValue() + ", Timestamp : " + data.getTimestamp());
+                }
 
             // Operation de traitement
             Traitement traitement = new Traitement(connection);

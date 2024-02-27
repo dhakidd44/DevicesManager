@@ -4,11 +4,12 @@ package com.management;
 public class ObjetConnecte {
 
     // Attributs de la classe
-    private int id; // Identifiant de l'appareil
-    private String nom; // Nom de l'appareil
-    private String type; // Type de l'appareil
+    private int id; 
+    private String nom; 
+    private String type; 
     private String categorie; // Catégorie de l'appareil
     private String location;
+ 
     private int etat; // État de l'appareil (1 pour actif, 0 pour inactif)
 
     // Constructeur avec les paramètres
@@ -49,6 +50,10 @@ public class ObjetConnecte {
     public String getAdresse() {
         return location;
     }
+
+    //public void  adreeseIp(int  adreeseIp){
+     //   return  adreeseIp;
+ //   }
 
     // Méthode pour définir l'état de l'appareil
     public void setEtat(int etat) {

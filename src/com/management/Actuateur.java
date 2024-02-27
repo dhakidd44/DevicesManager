@@ -14,7 +14,7 @@ package com.management;
 public class Actuateur extends ObjetConnecte {
 
     // Attributs de la classe
-    private int idActuateur; // Renommé pour éviter le conflit de noms
+    private int idActuateur; 
     private String nom;
     private String modele;
     private String numeroSerie;
