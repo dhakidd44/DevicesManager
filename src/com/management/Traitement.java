@@ -22,6 +22,7 @@ import java.util.Scanner;
 public class Traitement {
     private static final Scanner scanner = new Scanner(System.in);
     Validation Validation = new Validation();
+    private Statement statement;
 
     private Connection connection;
 
@@ -165,16 +166,65 @@ public void afficherTousObjets(Connection connection) throws SQLException {
         }
     }
 
-    // Demande a l utilisateur d apparail quil veut mettre jaour
-    public void newDemand() throws SQLException {
-        System.out.print("Entrez l'ID de l'appareil que vous souhaitez mettre à jour : ");
-        int appareilIdToUpdate = scanner.nextInt();
+    // Demande a l utilisateur d apparail quil veut mettre jour
+// Demande à l'utilisateur quel appareil il veut mettre à jour
+public void newDemand() throws SQLException {
+    System.out.println("Entrez le nom de l'appareil à mettre à jour :");
+    String nomAppareil = scanner.nextLine();
 
-        System.out.print("Entrez le nouvel état de fonctionnement (1 pour actif, 0 pour inactif) : ");
-        int newStateToUpdate = scanner.nextInt();
-        updateAppareilState(appareilIdToUpdate, newStateToUpdate);
-
+    // Vérifier si l'appareil existe
+    String checkIfExistsQuery = "SELECT * FROM Objets WHERE Nom = '" + nomAppareil + "'";
+    if (!statement.executeQuery(checkIfExistsQuery).next()) {
+        System.out.println("L'appareil spécifié n'existe pas.");
+        return;
     }
+
+    // L'appareil existe, vous pouvez continuer avec la mise à jour
+    System.out.println("Que souhaitez-vous mettre à jour ?");
+    System.out.println("1. Type");
+    System.out.println("2. Catégorie");
+    System.out.println("3. Adresse IP");
+    System.out.println("4. Location");
+    System.out.println("5. État");
+    System.out.print("Choix : ");
+
+    int choix = scanner.nextInt();
+    scanner.nextLine(); // Pour consommer la nouvelle ligne après le nextInt()
+
+    String columnToUpdate = "";
+    switch (choix) {
+        case 1:
+            columnToUpdate = "Type";
+            break;
+        case 2:
+            columnToUpdate = "Categorie";
+            break;
+        case 3:
+            columnToUpdate = "adresse_ip";
+            break;
+        case 4:
+            columnToUpdate = "Location";
+            break;
+        case 5:
+            columnToUpdate = "Etat";
+            break;
+        default:
+            System.out.println("Choix invalide.");
+            return;
+    }
+
+    System.out.println("Entrez la nouvelle valeur pour " + columnToUpdate + " :");
+    String nouvelleValeur = scanner.nextLine();
+
+    String updateQuery = String.format("UPDATE Objets SET %s = '%s' WHERE Nom = '%s'", columnToUpdate, nouvelleValeur, nomAppareil);
+    int rowsAffected = statement.executeUpdate(updateQuery);
+
+    if (rowsAffected > 0) {
+        System.out.println("Mise à jour effectuée avec succès.");
+    } else {
+        System.out.println("La mise à jour a échoué.");
+    }
+}
 
     private String validateStringInput(Scanner scanner) {
         String input;

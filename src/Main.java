@@ -97,7 +97,7 @@ public class Main {
             do {
                 System.out.println("Menu:");
                 System.out.println("1. Enregistrer des Appareils dans notre Répertoire");
-                System.out.println("2. Afficher toutes les données");
+                System.out.println("2. Afficher touts Les Appareils");
                 System.out.println("3. Mise à jour de l'État d'un Appareil");
                 System.out.println("4. Supprimer un Appareil");
                 System.out.println("0. Quitter");
@@ -130,7 +130,7 @@ public class Main {
                             break;
                         case 4:
                             System.out.println("Supprimer un Appareil");
-                            traitement.deleteAppareilById();
+                            traitement.deleteAppareilByNom();
                             break;
                         case 0:
                             System.out.println("Fin du programme");
