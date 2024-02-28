@@ -32,6 +32,7 @@ public class CreateDb {
                     + "Nom VARCHAR(255) NOT NULL,"
                     + "Type VARCHAR(255),"
                     + "Categorie VARCHAR(255),"
+                    + "adresse_ip VARCHAR(15),"
                     + "Location VARCHAR(255),"
                     + "Etat INT DEFAULT 1, "
                     + "CONSTRAINT check_etat CHECK (Etat IN (0, 1)),"

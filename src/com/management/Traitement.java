@@ -341,6 +341,7 @@ public void afficherTousObjets(Connection connection) throws SQLException {
                         resultSet.getString("Type"),
                         resultSet.getString("Categorie"),
                         resultSet.getString("Location"),
+                        resultSet.getString("adresseIp"),
                         resultSet.getInt("Etat")
 
                 );

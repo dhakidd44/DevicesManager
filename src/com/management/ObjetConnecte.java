@@ -7,18 +7,19 @@ public class ObjetConnecte {
     private int id; 
     private String nom; 
     private String type; 
-    private String categorie; // Catégorie de l'appareil
+    private String categorie;
     private String location;
- 
+    private String adresse_ip;
     private int etat; // État de l'appareil (1 pour actif, 0 pour inactif)
 
     // Constructeur avec les paramètres
-    public ObjetConnecte(int id, String nom, String type, String categorie, String location, int etat) {
+    public ObjetConnecte(int id, String nom, String type, String categorie, String location,String adresse_ip, int etat) {
         this.id = id;
         this.nom = nom;
         this.type = type;
         this.categorie = categorie;
         this.location = location;
+        this.adresse_ip = adresse_ip ;
         this.etat = etat;
     }
 
@@ -35,6 +36,9 @@ public class ObjetConnecte {
     public String getNom() {
         return nom;
     }
+    public String getadresse_ip() {
+        return adresse_ip;
+    }
 
     // Méthode pour obtenir le type de l'appareil
     public String getType() {
@@ -50,11 +54,6 @@ public class ObjetConnecte {
     public String getAdresse() {
         return location;
     }
-
-    //public void  adreeseIp(int  adreeseIp){
-     //   return  adreeseIp;
- //   }
-
     // Méthode pour définir l'état de l'appareil
     public void setEtat(int etat) {
         this.etat = etat;
@@ -69,6 +68,7 @@ public class ObjetConnecte {
                 ", type='" + type + '\'' +
                 ", categorie='" + categorie + '\'' +
                 ", location='" + location + '\'' +
+                ", adresseIp='" + adresse_ip + '\'' +
                 ", etat=" + etat +
                 '}';
     }
