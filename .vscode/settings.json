@@ -3,6 +3,10 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Iot2\\Session 2\\PROG 1357\\Contenu\\postgresql-42.7.1.jar"
+        "c:\\Iot2\\Session 2\\PROG 1357\\Contenu\\postgresql-42.7.1.jar",
+        "c:\\Users\\ernes\\Downloads\\gson-2.10-javadoc.jar",
+        "c:\\Users\\ernes\\Downloads\\javax.json-api-1.1.4-javadoc.jar",
+        "c:\\Iot2\\Session 2\\PROG 1357\\Contenu\\spark.jar",
+        "c:\\Users\\ernes\\Downloads\\gson-2.6.2-javadoc.jar"
     ]
 }

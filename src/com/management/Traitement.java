@@ -458,20 +458,18 @@ public void newDemand() throws SQLException {
         scanner.close();
     }
 
-    // Méthode pour supprimer un appareil par ID
-    public void deleteAppareilById() throws SQLException {
-        // Utilisation de Scanner pour lire l'ID à partir de l'entrée utilisateur
-        System.out.print("Entrez l'ID de l'appareil que vous souhaitez supprimer : ");
+     // Méthode pour supprimer un appareil par son nom
+     public void deleteAppareilByNom() throws SQLException {
+        // Demander le nom de l'appareil à supprimer à l'utilisateur
+        System.out.print("Entrez le nom de l'appareil que vous souhaitez supprimer : ");
+        String nomAppareil = scanner.nextLine();
 
-        int appareilIdToDelete = scanner.nextInt();
-
-        // Vérifier si l'ID existe avant de supprimer
-        if (appareilExists(appareilIdToDelete)) {
-
-            String deleteAppareilQuery = "DELETE FROM Objets WHERE ID = ?";
+        // Vérifier si l'appareil existe avant de supprimer
+        if (appareilExists(nomAppareil)) {
+            String deleteAppareilQuery = "DELETE FROM Objets WHERE Nom = ?";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(deleteAppareilQuery)) {
-                preparedStatement.setInt(1, appareilIdToDelete);
+                preparedStatement.setString(1, nomAppareil);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 
@@ -482,22 +480,15 @@ public void newDemand() throws SQLException {
                 }
             }
         } else {
-            System.out.println("Aucun appareil trouvé avec cet ID.");
+            System.out.println("Aucun appareil trouvé avec ce nom.");
         }
     }
 
-    private boolean appareilExists(int appareilId) throws SQLException {
-        String checkAppareilQuery = "SELECT COUNT(*) FROM Objets WHERE ID = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(checkAppareilQuery)) {
-            preparedStatement.setInt(1, appareilId);
-
-            try (var resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getInt(1) > 0;
-                }
-            }
+    // Méthode pour vérifier si un appareil existe dans la base de données par son nom
+    private boolean appareilExists(String nomAppareil) throws SQLException {
+        String checkIfExistsQuery = "SELECT * FROM Objets WHERE Nom = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(checkIfExistsQuery)) {
+            preparedStatement.setString(1, nomAppareil);
+            return preparedStatement.executeQuery().next();}
         }
-        return false;
-    }
-
-}
+    };

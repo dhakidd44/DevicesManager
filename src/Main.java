@@ -15,7 +15,6 @@ import com.management.ObjetConnecte;
 import com.management.Simulation;
 import com.management.CreateDb;
 import com.management.FromGenerateur;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -142,7 +141,7 @@ public class Main {
                 } catch (NumberFormatException e) {
                     System.out.println("Entrée invalide. Réessayez.");
                     choix = -1;
-                    scanner.nextLine(); // Clear scanner buffer
+                    scanner.nextLine(); 
                 }
 
             } while (choix != 0);

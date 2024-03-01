@@ -11,7 +11,7 @@
 
 package com.management;
 
-public class Actuateur extends ObjetConnecte {
+public class Actuateur {
 
     // Attributs de la classe
     private int idActuateur; 
@@ -22,7 +22,6 @@ public class Actuateur extends ObjetConnecte {
 
     // Constructeur avec les paramètres
     public Actuateur(int id_Actuateur, String nom, String modele, String numeroSerie, int etat) {
-        super(id_Actuateur); // Appeler le constructeur de la classe parente avec l'id_Actuateur
         this.idActuateur = id_Actuateur;
         this.nom = nom;
         this.modele = modele;

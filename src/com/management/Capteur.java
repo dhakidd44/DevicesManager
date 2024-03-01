@@ -11,8 +11,7 @@
 
 package com.management;
 
-public class Capteur extends ObjetConnecte {
-
+public class Capteur  {
     // Attributs de la classe
     private int idCapteur; // Renommé pour éviter le conflit de noms
     private String nom;
@@ -22,7 +21,7 @@ public class Capteur extends ObjetConnecte {
 
     // Constructeur avec les paramètres
     public Capteur(int id_Capteur, String nom, String modele, String numeroSerie, int etat) {
-        super(id_Capteur); // Appeler le constructeur de la classe parente avec l'id_Capteur
+
         this.idCapteur = id_Capteur;
         this.nom = nom;
         this.modele = modele;
