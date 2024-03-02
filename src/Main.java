@@ -11,16 +11,28 @@
 */
 
 import com.management.Traitement;
+import com.management.SensorDataReceiver;
 import com.management.ObjetConnecte;
 import com.management.Simulation;
 import com.management.CreateDb;
 import com.management.FromGenerateur;
+
+import java.net.InetSocketAddress;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
 
 public class Main {
 
@@ -30,6 +42,13 @@ public class Main {
             String url = "jdbc:postgresql://localhost:5432/new1";
             String utilisateur = "postgres";
             String motDePasse = "admin";
+
+                    int serverPort = 8000; // Port du serveur
+        HttpServer server = HttpServer.create(new InetSocketAddress(serverPort), 0);
+        server.createContext("/endpoint", new SensorDataHandler());
+        server.setExecutor(null); // Crée un thread pour chaque requête
+        server.start();
+        System.out.println("Serveur démarré sur le port : " + serverPort);
 
             // Instanciation de la classe Simulation
             Simulation simulation = new Simulation();
