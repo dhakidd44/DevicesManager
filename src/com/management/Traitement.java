@@ -379,11 +379,12 @@ public void newDemand() throws SQLException {
         }
     }
 
+    // Méthode pour récupérer tous les appareils depuis la base de données
     public List<ObjetConnecte> getAllAppareils() throws SQLException {
         List<ObjetConnecte> appareilList = new ArrayList<>();
         String selectQuery = "SELECT * FROM Objets";
         try (Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(selectQuery)) {
+             ResultSet resultSet = statement.executeQuery(selectQuery)) {
             while (resultSet.next()) {
                 ObjetConnecte appareil = new ObjetConnecte(
                         resultSet.getInt("ID"),
@@ -392,8 +393,8 @@ public void newDemand() throws SQLException {
                         resultSet.getString("Categorie"),
                         resultSet.getString("Location"),
                         resultSet.getString("adresseIp"),
-                        resultSet.getInt("Etat")
-
+                        resultSet.getInt("Etat"),
+                        resultSet.getDate("Date")
                 );
                 appareilList.add(appareil);
             }

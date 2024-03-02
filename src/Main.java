@@ -11,27 +11,16 @@
 */
 
 import com.management.Traitement;
-import com.management.SensorDataReceiver;
 import com.management.ObjetConnecte;
 import com.management.Simulation;
 import com.management.CreateDb;
 import com.management.FromGenerateur;
-
-import java.net.InetSocketAddress;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
-
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.AbstractHandler;
 
 
 public class Main {
@@ -43,12 +32,6 @@ public class Main {
             String utilisateur = "postgres";
             String motDePasse = "admin";
 
-                    int serverPort = 8000; // Port du serveur
-        HttpServer server = HttpServer.create(new InetSocketAddress(serverPort), 0);
-        server.createContext("/endpoint", new SensorDataHandler());
-        server.setExecutor(null); // Crée un thread pour chaque requête
-        server.start();
-        System.out.println("Serveur démarré sur le port : " + serverPort);
 
             // Instanciation de la classe Simulation
             Simulation simulation = new Simulation();
@@ -58,7 +41,7 @@ public class Main {
             Connection connection = DriverManager.getConnection(url, utilisateur, motDePasse);
             
             // Instanciation de la classe pour generer des donnees dans la pile
-            FromGenerateur fromGenerateur = new FromGenerateur(connection);
+          //  FromGenerateur fromGenerateur = new FromGenerateur(connection);
 
             // Créer les tables en utilisant la classe CreateDb
             CreateDb createDb = new CreateDb();
@@ -97,7 +80,7 @@ public class Main {
                 Stack<FromGenerateur.Data> dataStack = new Stack<>();
             
                 // Ajout de données aléatoires à la pile
-                fromGenerateur.addRandomDataToStack(dataStack, 10);
+              //  fromGenerateur.addRandomDataToStack(dataStack, 10);
             
                 // Affichage des informations stockées dans la pile
                 System.out.println("Informations stockées dans la pile :");
@@ -178,6 +161,9 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+
     }
 }
 
